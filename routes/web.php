@@ -3,7 +3,7 @@
 use App\Http\Controllers\NasaNeoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Neo/Form'));
+Route::get('/', fn () => inertia('Neo/Form'))->name('index');
 
 Route::get('nasa-neo', [NasaNeoController::class, 'getNeoData'])->name('nasa.neo');
 

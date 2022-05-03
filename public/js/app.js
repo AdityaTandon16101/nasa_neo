@@ -21571,10 +21571,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -21582,44 +21582,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/dist/index.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.esm.js");
 
+
+chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_0__.Title, chart_js__WEBPACK_IMPORTED_MODULE_0__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_0__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_0__.BarElement, chart_js__WEBPACK_IMPORTED_MODULE_0__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_0__.LinearScale);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["numberOfAstroids"],
-  setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
-    expose();
-    var props = __props;
-    var ctx = document.getElementById("Chart").getContext("2d");
-    var barChart = new chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: Object.keys(props.numberOfAstroids),
+  name: "BarChart",
+  components: {
+    Bar: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Bar
+  },
+  props: {
+    dates: {
+      type: Array
+    },
+    numberOfAstroids: {
+      type: Object
+    },
+    chartId: {
+      type: String,
+      "default": "bar-chart"
+    },
+    datasetIdKey: {
+      type: String,
+      "default": "label"
+    },
+    width: {
+      type: Number,
+      "default": 400
+    },
+    height: {
+      type: Number,
+      "default": 400
+    },
+    cssClasses: {
+      "default": "",
+      type: String
+    },
+    styles: {
+      type: Object,
+      "default": function _default() {}
+    },
+    plugins: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.chartData.labels = this.dates;
+    this.chartData.datasets[0].data = this.numberOfAstroids;
+  },
+  data: function data() {
+    return {
+      chartData: {
+        labels: [],
         datasets: [{
           label: "Number of Astroids",
-          data: Object.values(props.numberOfAstroids),
-          borderWidth: 1
+          data: []
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
+      chartOptions: {
+        responsive: true
       }
-    });
-    var __returned__ = {
-      props: props,
-      ctx: ctx,
-      barChart: barChart,
-      Chart: chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart
     };
-    Object.defineProperty(__returned__, '__isScriptSetup', {
-      enumerable: false,
-      value: true
-    });
-    return __returned__;
   }
 });
 
@@ -22499,8 +22526,8 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.useForm)({
-      start_date: "2022-05-01",
-      end_date: "2022-05-03"
+      start_date: null,
+      end_date: null
     });
 
     var submit = function submit() {
@@ -22541,17 +22568,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Components_Chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Chart.vue */ "./resources/js/Components/Chart.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Components_Chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Chart.vue */ "./resources/js/Components/Chart.vue");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["numberOfAstroids", "fastestAstroids", "closestAstroids", "averageSizes"],
+  props: ["dates", "numberOfAstroids", "fastestAstroids", "closestAstroids", "averageSizes"],
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var props = __props;
+    var props = __props; // onMounted(() => {
+    //   console.info("dates", props.dates);
+    //   console.info("no_of_astroids", props.numberOfAstroids);
+    //   console.info("fastestAstroids", props.fastestAstroids);
+    //   console.info("closestAstroids", props.closestAstroids);
+    //   console.info("averageSizes", props.averageSizes);
+    // });
+
     var __returned__ = {
       props: props,
-      Chart: _Components_Chart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+      Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
+      Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link,
+      Chart: _Components_Chart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      onMounted: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.onMounted
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -22669,13 +22710,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  id: "Chart",
-  width: "400",
-  height: "400"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("canvas", _hoisted_1);
+  var _component_Bar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Bar");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Bar, {
+    "chart-options": $data.chartOptions,
+    "chart-data": $data.chartData,
+    "chart-id": $props.chartId,
+    "dataset-id-key": $props.datasetIdKey,
+    plugins: $props.plugins,
+    "css-classes": $props.cssClasses,
+    styles: $props.styles,
+    width: $props.width,
+    height: $props.height
+  }, null, 8
+  /* PROPS */
+  , ["chart-options", "chart-data", "chart-id", "dataset-id-key", "plugins", "css-classes", "styles", "width", "height"]);
 }
 
 /***/ }),
@@ -23907,31 +23957,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["onSubmit"];
+var _hoisted_1 = {
+  "class": "w-1/4 mx-auto"
+};
+var _hoisted_2 = ["onSubmit"];
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-xl my-3"
 }, "Get NASA NEO Data", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
+var _hoisted_4 = {
   "class": "mb-2"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Submit");
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, null, -1
-/* HOISTED */
-);
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Submit");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.submit, ["prevent"]),
-    "class": "shadow-sm bg-white w-1/4 mx-auto"
+    "class": "shadow-sm bg-white"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ValidationErrors"], {
     "class": "mb-4"
-  }), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Label"], {
+  }), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Label"], {
     "class": "leading-8",
     value: "Choose Start Date"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Input"], {
@@ -23962,14 +24011,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "submit"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_4];
+      return [_hoisted_5];
     }),
     _: 1
     /* STABLE */
 
   })], 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_1), _hoisted_5]);
+  , _hoisted_2)]);
 }
 
 /***/ }),
@@ -23988,29 +24037,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "table w-full"
+  "class": "w-3/4 mt-4 mx-auto"
+};
+var _hoisted_2 = {
+  "class": "table w-3/5 mx-auto"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Fastest"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Closest"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Average")])], -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Fastest"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Closest"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Average")])], -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Fastest Asteroid (km/h)", -1
-/* HOISTED */
-);
+var _hoisted_4 = {
+  "class": "flex-1 h-60"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Go Back");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.fastestAstroids, function (astroid) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.dates, function (date, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
-      key: astroid
-    });
+      key: date
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(date), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.fastestAstroids[index].name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.closestAstroids[index].name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.averageSizes[index]), 1
+    /* TEXT */
+    )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_3]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Chart"], {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Chart"], {
+    dates: $setup.props.dates,
     numberOfAstroids: $setup.props.numberOfAstroids
   }, null, 8
   /* PROPS */
-  , ["numberOfAstroids"])])]);
+  , ["dates", "numberOfAstroids"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
+    href: _ctx.route('index')
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_5];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["href"])])]);
 }
 
 /***/ }),
@@ -61768,6 +61842,241 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-chartjs/dist/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/vue-chartjs/dist/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Bar": () => (/* binding */ Bar),
+/* harmony export */   "Bubble": () => (/* binding */ Bubble),
+/* harmony export */   "Doughnut": () => (/* binding */ Doughnut),
+/* harmony export */   "Line": () => (/* binding */ Line),
+/* harmony export */   "Pie": () => (/* binding */ Pie),
+/* harmony export */   "PolarArea": () => (/* binding */ PolarArea),
+/* harmony export */   "Radar": () => (/* binding */ Radar),
+/* harmony export */   "Scatter": () => (/* binding */ Scatter),
+/* harmony export */   "generateChart": () => (/* binding */ generateChart)
+/* harmony export */ });
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+
+var ChartEmits;
+(function(ChartEmits) {
+    ChartEmits["ChartRendered"] = 'chart:rendered';
+    ChartEmits["ChartUpdated"] = 'chart:updated';
+    ChartEmits["ChartDestroyed"] = 'chart:destroyed';
+    ChartEmits["LabelsUpdated"] = 'labels:updated';
+})(ChartEmits || (ChartEmits = {}));
+function chartCreate(createChartFunction, chartData, chartOptions, context) {
+    createChartFunction(chartData, chartOptions);
+    if (context !== undefined) {
+        context.emit(ChartEmits.ChartRendered);
+    }
+}
+function chartUpdate(chart, context) {
+    chart.update();
+    if (context !== undefined) {
+        context.emit(ChartEmits.ChartUpdated);
+    }
+}
+function chartDestroy(chart, context) {
+    chart.destroy();
+    if (context !== undefined) {
+        context.emit(ChartEmits.ChartDestroyed);
+    }
+}
+function getChartData(data, datasetIdKey) {
+    const nextData = {
+        labels: typeof data.labels === 'undefined' ? [] : [
+            ...data.labels
+        ],
+        datasets: []
+    };
+    setChartDatasets(nextData, {
+        ...data
+    }, datasetIdKey);
+    return nextData;
+}
+function setChartDatasets(oldData, newData, datasetIdKey) {
+    const addedDatasets = [];
+    oldData.datasets = newData.datasets.map((nextDataset)=>{
+        // given the new set, find it's current match
+        const currentDataset = oldData.datasets.find((dataset)=>dataset[datasetIdKey] === nextDataset[datasetIdKey]
+        );
+        // There is no original to update, so simply add new one
+        if (!currentDataset || !nextDataset.data || addedDatasets.includes(currentDataset)) {
+            return {
+                ...nextDataset
+            };
+        }
+        addedDatasets.push(currentDataset);
+        Object.assign(currentDataset, nextDataset);
+        return currentDataset;
+    });
+}
+function setChartLabels(chart, labels, context) {
+    chart.data.labels = labels;
+    if (context !== undefined) {
+        context.emit(ChartEmits.LabelsUpdated);
+    }
+}
+function compareData(newData, oldData) {
+    // Get new and old DataSet Labels
+    const newDatasetLabels = newData.datasets.map((dataset)=>{
+        return dataset.label;
+    });
+    const oldDatasetLabels = oldData.datasets.map((dataset)=>{
+        return dataset.label;
+    });
+    // Check if Labels are equal and if dataset length is equal
+    return oldData.datasets.length === newData.datasets.length && newDatasetLabels.every((value, index)=>value === oldDatasetLabels[index]
+    );
+}
+const templateError = 'Please remove the <template></template> tags from your chart component. See https://vue-chartjs.org/guide/#vue-single-file-components';
+
+const generateChart = (chartId, chartType, chartController)=>{
+    return (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+        props: {
+            chartData: {
+                type: Object,
+                required: true
+            },
+            chartOptions: {
+                type: Object,
+                default: ()=>{}
+            },
+            datasetIdKey: {
+                type: String,
+                default: 'label'
+            },
+            chartId: {
+                type: String,
+                default: chartId
+            },
+            width: {
+                type: Number,
+                default: 400
+            },
+            height: {
+                type: Number,
+                default: 400
+            },
+            cssClasses: {
+                type: String,
+                default: ''
+            },
+            styles: {
+                type: Object,
+                default: ()=>{}
+            },
+            plugins: {
+                type: Array,
+                default: ()=>[]
+            }
+        },
+        setup (props, context) {
+            chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chartController);
+            const _chart = (0,vue__WEBPACK_IMPORTED_MODULE_1__.shallowRef)(null);
+            const canvasEl = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
+            function renderChart(data, options) {
+                if (_chart.value !== null) {
+                    chartDestroy((0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(_chart.value), context);
+                }
+                if (canvasEl.value === null) {
+                    throw new Error(templateError);
+                } else {
+                    const chartData = getChartData(data, props.datasetIdKey);
+                    const canvasEl2DContext = canvasEl.value.getContext('2d');
+                    if (canvasEl2DContext !== null) {
+                        _chart.value = new chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart(canvasEl2DContext, {
+                            type: chartType,
+                            data: (0,vue__WEBPACK_IMPORTED_MODULE_1__.isProxy)(data) ? new Proxy(chartData, {}) : chartData,
+                            options,
+                            plugins: props.plugins
+                        });
+                    }
+                }
+            }
+            function chartDataHandler(newValue, oldValue) {
+                const newData = (0,vue__WEBPACK_IMPORTED_MODULE_1__.isProxy)(newValue) ? (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(newValue) : {
+                    ...newValue
+                };
+                const oldData = (0,vue__WEBPACK_IMPORTED_MODULE_1__.isProxy)(oldValue) ? (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(oldValue) : {
+                    ...oldValue
+                };
+                if (Object.keys(oldData).length > 0) {
+                    const chart = (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(_chart.value);
+                    const isEqualLabelsAndDatasetsLength = compareData(newData, oldData);
+                    if (isEqualLabelsAndDatasetsLength && chart !== null) {
+                        setChartDatasets(chart === null || chart === void 0 ? void 0 : chart.data, newData, props.datasetIdKey);
+                        if (newData.labels !== undefined) {
+                            setChartLabels(chart, newData.labels, context);
+                        }
+                        chartUpdate(chart, context);
+                    } else {
+                        if (chart !== null) {
+                            chartDestroy(chart, context);
+                        }
+                        chartCreate(renderChart, props.chartData, props.chartOptions, context);
+                    }
+                } else {
+                    if (_chart.value !== null) {
+                        chartDestroy((0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(_chart.value), context);
+                    }
+                    chartCreate(renderChart, props.chartData, props.chartOptions, context);
+                }
+            }
+            (0,vue__WEBPACK_IMPORTED_MODULE_1__.watch)(()=>props.chartData
+            , (newValue, oldValue)=>chartDataHandler(newValue, oldValue)
+            , {
+                deep: true
+            });
+            (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(()=>{
+                if ('datasets' in props.chartData && props.chartData.datasets.length > 0) {
+                    chartCreate(renderChart, props.chartData, props.chartOptions, context);
+                }
+            });
+            (0,vue__WEBPACK_IMPORTED_MODULE_1__.onBeforeUnmount)(()=>{
+                if (_chart.value !== null) {
+                    chartDestroy((0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(_chart.value), context);
+                }
+            });
+            return ()=>(0,vue__WEBPACK_IMPORTED_MODULE_1__.h)('div', {
+                    style: props.styles,
+                    class: props.cssClasses
+                }, [
+                    (0,vue__WEBPACK_IMPORTED_MODULE_1__.h)('canvas', {
+                        id: props.chartId,
+                        width: props.width,
+                        height: props.height,
+                        ref: canvasEl
+                    })
+                ])
+            ;
+        }
+    });
+};
+const Bar = /* #__PURE__ */ generateChart('bar-chart', 'bar', chart_js__WEBPACK_IMPORTED_MODULE_0__.BarController);
+const Doughnut = /* #__PURE__ */ generateChart('doughnut-chart', 'doughnut', chart_js__WEBPACK_IMPORTED_MODULE_0__.DoughnutController);
+const Line = /* #__PURE__ */ generateChart('line-chart', 'line', chart_js__WEBPACK_IMPORTED_MODULE_0__.LineController);
+const Pie = /* #__PURE__ */ generateChart('pie-chart', 'pie', chart_js__WEBPACK_IMPORTED_MODULE_0__.PieController);
+const PolarArea = /* #__PURE__ */ generateChart('polar-chart', 'polarArea', chart_js__WEBPACK_IMPORTED_MODULE_0__.PolarAreaController);
+const Radar = /* #__PURE__ */ generateChart('radar-chart', 'radar', chart_js__WEBPACK_IMPORTED_MODULE_0__.RadarController);
+const Bubble = /* #__PURE__ */ generateChart('bubble-chart', 'bubble', chart_js__WEBPACK_IMPORTED_MODULE_0__.BubbleController);
+const Scatter = /* #__PURE__ */ generateChart('scatter-chart', 'scatter', chart_js__WEBPACK_IMPORTED_MODULE_0__.ScatterController);
+
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/dist/exportHelper.js":
 /*!******************************************************!*\
   !*** ./node_modules/vue-loader/dist/exportHelper.js ***!
@@ -61856,14 +62165,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Chart_vue_vue_type_template_id_3c5c65a3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chart.vue?vue&type=template&id=3c5c65a3 */ "./resources/js/Components/Chart.vue?vue&type=template&id=3c5c65a3");
-/* harmony import */ var _Chart_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue?vue&type=script&setup=true&lang=js */ "./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _Chart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chart.vue?vue&type=script&lang=js */ "./resources/js/Components/Chart.vue?vue&type=script&lang=js");
 /* harmony import */ var _home_aditya_Documents_laravel_nasa_neo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_home_aditya_Documents_laravel_nasa_neo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Chart_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Chart_vue_vue_type_template_id_3c5c65a3__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Components/Chart.vue"]])
+const __exports__ = /*#__PURE__*/(0,_home_aditya_Documents_laravel_nasa_neo_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Chart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Chart_vue_vue_type_template_id_3c5c65a3__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Components/Chart.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -62451,18 +62760,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js":
-/*!******************************************************************************!*\
-  !*** ./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js ***!
-  \******************************************************************************/
+/***/ "./resources/js/Components/Chart.vue?vue&type=script&lang=js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/Components/Chart.vue?vue&type=script&lang=js ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Chart_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Chart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Chart_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Chart.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Chart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Chart.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Chart.vue?vue&type=script&lang=js");
  
 
 /***/ }),

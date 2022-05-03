@@ -32,13 +32,15 @@ class NasaNeoController extends Controller
     {
         $closest = 0;
         $closestAstroid = null;
+        $distances = array_map(fn ($astroid) => $astroid['close_approach_data'][0]['miss_distance']['kilometers'], $day);
+        $closest = max($distances);
         foreach ($day as $astroid) {
             // get the distance in KM
-            $astroidMissDistanceInKM = $astroid['close_approach_data'][0]['miss_distance']['kilometers'];
+            $astroidDistanceInKM = $astroid['close_approach_data'][0]['miss_distance']['kilometers'];
             // checks if closest distance is greater then this distance
-            if ($closest > $astroidMissDistanceInKM) {
+            if ($closest > $astroidDistanceInKM) {
                 // put current distance into closest
-                $closest = $astroidMissDistanceInKM;
+                $closest = $astroidDistanceInKM;
                 // Also put the current astroid in declaired valriable
                 $closestAstroid = $astroid;
             }
@@ -70,23 +72,31 @@ class NasaNeoController extends Controller
         ])->json();
 
         // Calculating number of astroids in each day
-        $numberOfAstroids = []; // stores date with count value like - ["2022-04-01" => 10]
+        $dates = [];
+        $numberOfAstroids = []; // stores count values
         $fastestAstroids = [];
         $closestAstroids = [];
         $averageSizes = [];
 
         foreach ($nasaNeoData['near_earth_objects'] as $date => $day) {
             // $date is the date and $day
-            // 
-            array_push($numberOfAstroids, [$date => count($day)]);
+            array_push($dates, $date);
+            array_push($numberOfAstroids, count($day));
 
             // calulating fastest Astroid
-            array_push($fastestAstroids, [$date => $this->getFastestAstroid($day)]);
-            array_push($closestAstroids, [$date => $this->getClosestAstroid($day)]);
-            array_push($averageSizes, [$date => $this->getAverageSize($day)]);
+            array_push($fastestAstroids, $this->getFastestAstroid($day));
+            array_push($closestAstroids, $this->getClosestAstroid($day));
+            array_push($averageSizes, $this->getAverageSize($day));
         }
 
+        // dump($dates);
+        // dump($numberOfAstroids);
+        // dump($fastestAstroids);
+        // dump($closestAstroids);
+        // dd($averageSizes);
+
         return inertia('Neo/Result', compact([
+            'dates',
             'numberOfAstroids',
             'fastestAstroids',
             'closestAstroids',
