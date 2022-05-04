@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Chart from "@/Components/Chart.vue";
-import { onMounted } from "@vue/runtime-core";
 const props = defineProps([
   "dates",
   "numberOfAstroids",
@@ -9,19 +8,11 @@ const props = defineProps([
   "closestAstroids",
   "averageSizes",
 ]);
-
-// onMounted(() => {
-//   console.info("dates", props.dates);
-//   console.info("no_of_astroids", props.numberOfAstroids);
-//   console.info("fastestAstroids", props.fastestAstroids);
-//   console.info("closestAstroids", props.closestAstroids);
-//   console.info("averageSizes", props.averageSizes);
-// });
 </script>
 
 <template>
-  <div class="w-3/4 mt-4 mx-auto">
-    <table class="table w-3/5 mx-auto">
+  <div class="flex flex-row flex-wrap w-3/4 mt-4 mx-auto">
+    <table class="table border w-3/5 mx-auto">
       <thead>
         <tr>
           <th>Date</th>
@@ -31,11 +22,13 @@ const props = defineProps([
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(date, index) in props.dates" :key="date">
-          <td>{{ index }} - {{ date }}</td>
+        <tr class="border-b" v-for="(date, index) in props.dates" :key="date">
+          <td>{{ date }}</td>
           <td>{{ props.fastestAstroids[index].name }}</td>
           <td>{{ props.closestAstroids[index].name }}</td>
-          <td>{{ props.averageSizes[index] }}</td>
+          <td>
+            {{ parseFloat(props.averageSizes[index]).toFixed(5) }}
+          </td>
         </tr>
       </tbody>
     </table>

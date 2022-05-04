@@ -6,8 +6,8 @@ import Button from "@/Components/Button.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 const form = useForm({
-  start_date: null,
-  end_date: null,
+  start_date: "2020-04-01",
+  end_date: "2020-04-10",
 });
 
 const submit = () => {
@@ -19,7 +19,7 @@ const submit = () => {
 
 <template>
   <div class="w-1/4 mx-auto">
-    <form @submit.prevent="submit" class="shadow-sm bg-white">
+    <form @submit.prevent="submit">
       <ValidationErrors class="mb-4" />
       <div class="text-xl my-3">Get NASA NEO Data</div>
       <div class="mb-2">

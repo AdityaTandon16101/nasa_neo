@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 
 class NasaNeoController extends Controller
 {
-
     public function getFastestAstroid($day)
     {
         $maxVelocityInKMPH = 0;
@@ -68,15 +67,21 @@ class NasaNeoController extends Controller
         $nasaNeoData = Http::get("https://api.nasa.gov/neo/rest/v1/feed", [
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'api_key' => 'DEMO_KEY'
-        ])->json();
+            'api_key' => config('nasa.api_key')
+        ]);
+        if (!$nasaNeoData->successful()) {
+            $nasaNeoData->throw();
+            return;
+        }
+
+        $nasaNeoData = $nasaNeoData->json();
 
         // Calculating number of astroids in each day
         $dates = [];
         $numberOfAstroids = []; // stores count values
-        $fastestAstroids = [];
-        $closestAstroids = [];
-        $averageSizes = [];
+        $fastestAstroids = []; // stores fastest Astroids
+        $closestAstroids = []; // stores closest Astroids
+        $averageSizes = []; // stores Average Sizes of the Astroids
 
         foreach ($nasaNeoData['near_earth_objects'] as $date => $day) {
             // $date is the date and $day
@@ -88,6 +93,10 @@ class NasaNeoController extends Controller
             array_push($closestAstroids, $this->getClosestAstroid($day));
             array_push($averageSizes, $this->getAverageSize($day));
         }
+
+        usort($dates, function ($date1, $date2) {
+            return strtotime($date1) - strtotime($date2);
+        });
 
         // dump($dates);
         // dump($numberOfAstroids);
